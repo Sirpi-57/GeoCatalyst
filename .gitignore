@@ -1,0 +1,238 @@
+# ============================================
+# GeoCatalyst - Git Ignore File
+# ============================================
+
+# ============================================
+# ENVIRONMENT & SECRETS
+# ============================================
+.env
+.env.local
+.env.*.local
+*.env
+
+# Firebase credentials
+firebase-admin-key.json
+firebase-service-account.json
+serviceAccountKey.json
+
+# API Keys
+*-credentials.json
+*-key.json
+secrets/
+
+# ============================================
+# PYTHON
+# ============================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# ============================================
+# NODE / JAVASCRIPT
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ============================================
+# IDEs & EDITORS
+# ============================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# ============================================
+# OPERATING SYSTEM
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+# ============================================
+# LOGS & DATABASES
+# ============================================
+*.log
+logs/
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# ============================================
+# TEMPORARY FILES
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+
+# ============================================
+# MEDIA & UPLOADS
+# ============================================
+uploads/
+media/
+static/uploads/
+temp/
+
+# But keep these directories
+!uploads/.gitkeep
+!media/.gitkeep
+
+# ============================================
+# BUILD & DEPLOYMENT
+# ============================================
+# Production builds
+/build
+/dist
+
+# Deployment files
+.deployment
+deploy_key
+deploy_key.pub
+
+# ============================================
+# TESTING
+# ============================================
+.coverage
+htmlcov/
+.pytest_cache/
+test-results/
+
+# ============================================
+# DOCUMENTATION
+# ============================================
+site/
+docs/_build/
+
+# ============================================
+# MISC
+# ============================================
+*.orig
+.sass-cache/
+.env.backup
+
+# ============================================
+# PROJECT SPECIFIC
+# ============================================
+# Cloudflare Stream videos (too large)
+videos/
+*.mp4
+*.mov
+*.avi
+
+# Generated PDFs
+generated-pdfs/
+
+# Cache
+.cache/
+*.cache
+
+# ============================================
+# KEEP THESE FILES
+# ============================================
+# Use ! to negate (explicitly include)
+!.gitignore
+!.env.example
+!README.md
