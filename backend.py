@@ -29,7 +29,8 @@ allowed_origins = [
     "https://fluffy-fortnight-v6j6w9x4px9cxpp7-5501.app.github.dev",  # Codespaces development
     "http://localhost:5501",  # Local testing
     "http://127.0.0.1:5501",  # Local testing
-    "https://geocatalyst-production.web.app",  # Firebase production
+    "https://geocatalyst-production.web.app",
+    "https://geocatalyst-student-backend.onrender.com",  # Firebase production
     "https://geocatalyst-production.firebaseapp.com"  # Firebase alternative URL
 ]
 

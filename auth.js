@@ -24,7 +24,7 @@ import {
 // BACKEND API CONFIGURATION
 // ============================================
 
-const API_BASE_URL = 'https://fluffy-fortnight-v6j6w9x4px9cxpp7-5000.app.github.dev/api';
+const API_BASE_URL = 'https://geocatalyst-student-backend.onrender.com/api';
 
 // ============================================
 // AUTHENTICATION STATE MANAGEMENT
