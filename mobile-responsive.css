@@ -1,0 +1,899 @@
+/* ============================================
+   GEOCATALYST - MOBILE RESPONSIVE ENHANCEMENTS
+   Add this to your existing styles.css or include separately
+   ============================================ */
+
+/* ============================================
+   MOBILE NAVIGATION IMPROVEMENTS
+   ============================================ */
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--text-dark);
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle.active {
+    color: var(--primary-color);
+}
+
+/* Hamburger Icon Animation */
+.hamburger {
+    width: 30px;
+    height: 3px;
+    background: var(--text-dark);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+.mobile-menu-toggle.active .hamburger {
+    background: transparent;
+}
+
+.mobile-menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+    background: var(--primary-color);
+}
+
+.mobile-menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+    background: var(--primary-color);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+@media (max-width: 1024px) {
+    /* Header Adjustments */
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .nav-link {
+        font-size: 14px;
+    }
+    
+    /* Dashboard Sidebar */
+    #sidebar {
+        width: 240px;
+    }
+    
+    #content {
+        margin-left: 240px;
+        padding: 30px;
+    }
+    
+    /* Hero Section */
+    .hero {
+        padding: 60px 0;
+    }
+    
+    .hero-title {
+        font-size: 40px;
+    }
+    
+    .hero-subtitle {
+        font-size: 22px;
+    }
+    
+    /* Pricing Grid */
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* ============================================
+       MOBILE HEADER
+       ============================================ */
+    
+    .header-content {
+        position: relative;
+    }
+    
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Hide desktop navigation by default */
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: white;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        transition: right 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        padding: 80px 0 20px;
+        overflow-y: auto;
+    }
+    
+    .nav.active {
+        right: 0;
+    }
+    
+    /* Mobile Navigation Links */
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 16px 24px;
+        font-size: 16px;
+        width: 100%;
+    }
+    
+    .nav-link.active::after {
+        display: none;
+    }
+    
+    .nav-link.active {
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    /* Auth Buttons in Mobile Menu */
+    .auth-buttons {
+        flex-direction: column;
+        width: 100%;
+        padding: 24px;
+        gap: 12px;
+        margin-top: auto;
+    }
+    
+    .auth-buttons .btn {
+        width: 100%;
+    }
+    
+    /* Mobile Menu Overlay */
+    .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .mobile-overlay.active {
+        display: block;
+    }
+    
+    /* ============================================
+       MOBILE HERO SECTION
+       ============================================ */
+    
+    .hero {
+        padding: 40px 0;
+    }
+    
+    .hero-title {
+        font-size: 32px;
+        line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+        font-size: 20px;
+    }
+    
+    .hero-description {
+        font-size: 16px;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-cta .btn {
+        width: 100%;
+    }
+    
+    /* ============================================
+       MOBILE SECTIONS
+       ============================================ */
+    
+    .section-title {
+        font-size: 28px;
+    }
+    
+    .section-subtitle {
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+    
+    .content-section {
+        padding: 40px 0;
+    }
+    
+    /* Subject Cards */
+    .subjects-preview {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .subject-card {
+        padding: 24px;
+    }
+    
+    /* ============================================
+       MOBILE FOOTER
+       ============================================ */
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .footer {
+        padding: 40px 0 20px;
+        margin-top: 60px;
+    }
+    
+    /* ============================================
+       MOBILE MODALS
+       ============================================ */
+    
+    .auth-modal,
+    .video-modal {
+        padding: 10px;
+    }
+    
+    .auth-modal-content,
+    .video-modal-content {
+        max-width: 100%;
+        margin: auto;
+    }
+    
+    .auth-modal-header,
+    .auth-form {
+        padding: 24px 20px;
+    }
+    
+    .auth-modal-header h2 {
+        font-size: 24px;
+    }
+    
+    .video-modal-header {
+        padding: 16px;
+    }
+    
+    .video-modal-body {
+        padding: 16px;
+    }
+    
+    /* ============================================
+       MOBILE DASHBOARD
+       ============================================ */
+    
+    /* Collapsible Sidebar */
+    #sidebar {
+        position: fixed;
+        left: -280px;
+        width: 280px;
+        z-index: 1000;
+        transition: left 0.3s ease;
+    }
+    
+    #sidebar.open {
+        left: 0;
+    }
+    
+    /* Dashboard Toggle Button */
+    .dashboard-menu-toggle {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 999;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        font-size: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .dashboard-menu-toggle:hover {
+        transform: scale(1.1);
+    }
+    
+    #content {
+        margin-left: 0;
+        padding: 80px 20px 20px;
+        width: 100%;
+    }
+    
+    /* Dashboard Cards */
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .dashboard-card {
+        padding: 20px;
+    }
+    
+    .dashboard-card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    
+    .dashboard-card-value {
+        font-size: 28px;
+    }
+    
+    /* Profile Grid */
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .profile-card {
+        padding: 20px;
+    }
+    
+    /* Test & Material Cards */
+    .test-subject-card,
+    .material-subject-card {
+        padding: 20px;
+    }
+    
+    /* ============================================
+       MOBILE TEST INTERFACE
+       ============================================ */
+    
+    /* Test Header */
+    .gate-test-header {
+        flex-direction: column;
+        padding: 12px;
+        gap: 12px;
+        min-height: auto;
+    }
+    
+    .gate-header-left {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .gate-logo {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .gate-header-title {
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+        font-size: 14px;
+    }
+    
+    .gate-brand {
+        font-size: 14px;
+    }
+    
+    .gate-test-name {
+        font-size: 13px;
+    }
+    
+    .gate-separator {
+        display: none;
+    }
+    
+    .gate-header-right {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .gate-header-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .gate-header-btn span {
+        display: none;
+    }
+    
+    .gate-header-btn i {
+        font-size: 16px;
+        margin: 0;
+    }
+    
+    /* Test Container */
+    .gate-test-container {
+        flex-direction: column;
+    }
+    
+    /* Question Panel */
+    .gate-question-panel {
+        margin: 8px;
+        padding: 16px;
+        max-height: none;
+    }
+    
+    .gate-question-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .gate-section-badge {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .gate-question-meta {
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 11px;
+    }
+    
+    .gate-question-content {
+        font-size: 15px;
+        padding-right: 0;
+    }
+    
+    .gate-question-content img {
+        max-width: 100%;
+        margin: 16px auto;
+    }
+    
+    /* Answer Options */
+    .gate-answer-options {
+        gap: 12px;
+    }
+    
+    .gate-option-item {
+        padding: 12px;
+    }
+    
+    .gate-option-letter {
+        font-size: 14px;
+        min-width: 20px;
+    }
+    
+    .gate-option-text {
+        font-size: 14px;
+    }
+    
+    /* NAT Input */
+    .gate-nat-container {
+        padding: 16px;
+    }
+    
+    .gate-nat-input {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    #gateNATKeyboard .hg-button {
+        height: 45px;
+        font-size: 16px;
+    }
+    
+    /* Navigation Buttons */
+    .gate-navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .gate-nav-btn {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 12px;
+    }
+    
+    /* Right Panel */
+    .gate-right-panel {
+        width: 100%;
+        max-height: none;
+        position: relative;
+        border-left: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 0 8px 8px;
+        border-radius: 12px;
+    }
+    
+    .gate-user-section {
+        padding: 12px;
+    }
+    
+    .gate-user-photo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .gate-user-name {
+        font-size: 13px;
+        max-width: 150px;
+    }
+    
+    .gate-timer-section {
+        padding: 8px 12px;
+    }
+    
+    .gate-timer {
+        font-size: 18px;
+    }
+    
+    /* Legend */
+    .gate-legend-section {
+        padding: 12px;
+    }
+    
+    .gate-legend-items {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .gate-legend-item {
+        font-size: 11px;
+    }
+    
+    /* Section Header */
+    .gate-section-header {
+        padding: 10px 12px;
+        margin: 0 12px 12px;
+    }
+    
+    .gate-section-name {
+        font-size: 13px;
+    }
+    
+    .gate-choose-question {
+        font-size: 11px;
+    }
+    
+    /* Palette Grid */
+    .gate-palette-container {
+        padding: 8px 12px;
+        max-height: 250px;
+    }
+    
+    .gate-palette-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+    }
+    
+    .gate-palette-btn {
+        min-height: 35px;
+        font-size: 11px;
+    }
+    
+    /* Submit Button */
+    .gate-submit-section {
+        padding: 12px;
+    }
+    
+    .gate-submit-btn {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    /* ============================================
+       MOBILE LEADERBOARD
+       ============================================ */
+    
+    .filter-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .filter-group {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .filter-actions {
+        width: 100%;
+    }
+    
+    .filter-actions .btn {
+        width: 100%;
+    }
+    
+    .test-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .leaderboard-table {
+        font-size: 12px;
+    }
+    
+    .leaderboard-table th,
+    .leaderboard-table td {
+        padding: 10px 6px;
+    }
+    
+    /* Hide less important columns on mobile */
+    .time-col,
+    .date-col {
+        display: none;
+    }
+    
+    .share-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    /* ============================================
+       EXTRA SMALL MOBILE DEVICES
+       ============================================ */
+    
+    /* Typography */
+    .hero-title {
+        font-size: 26px;
+    }
+    
+    .hero-subtitle {
+        font-size: 18px;
+    }
+    
+    .section-title {
+        font-size: 24px;
+    }
+    
+    /* Container Padding */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .btn-large {
+        padding: 14px 28px;
+        font-size: 15px;
+    }
+    
+    /* Modal Adjustments */
+    .auth-modal-header h2 {
+        font-size: 22px;
+    }
+    
+    .form-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Dashboard */
+    #content {
+        padding: 70px 15px 15px;
+    }
+    
+    .dashboard-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .dashboard-card-icon {
+        margin: 0 auto 12px;
+    }
+    
+    /* Test Interface */
+    .gate-question-panel {
+        margin: 6px;
+        padding: 12px;
+    }
+    
+    .gate-question-content {
+        font-size: 14px;
+    }
+    
+    .gate-option-text {
+        font-size: 13px;
+    }
+    
+    .gate-palette-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+    }
+    
+    .gate-palette-btn {
+        min-height: 32px;
+        font-size: 10px;
+    }
+    
+    /* Leaderboard */
+    .leaderboard-table {
+        font-size: 11px;
+    }
+    
+    .leaderboard-table th,
+    .leaderboard-table td {
+        padding: 8px 4px;
+    }
+    
+    /* Hide wrong answers column on very small screens */
+    .wrong-col {
+        display: none;
+    }
+}
+
+/* ============================================
+   LANDSCAPE MODE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding: 30px 0;
+    }
+    
+    .gate-test-container {
+        flex-direction: row;
+    }
+    
+    .gate-question-panel {
+        flex: 1;
+    }
+    
+    .gate-right-panel {
+        width: 280px;
+        border-top: none;
+        border-left: 1px solid #e0e0e0;
+        margin: 8px 8px 8px 0;
+    }
+    
+    .gate-palette-container {
+        max-height: calc(100vh - 400px);
+    }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Increase tap targets */
+    .nav-link {
+        padding: 18px 24px;
+    }
+    
+    .btn {
+        min-height: 44px;
+    }
+    
+    .gate-palette-btn {
+        min-height: 40px;
+    }
+    
+    .gate-option-item {
+        min-height: 60px;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .subject-card:hover,
+    .team-member-card:hover,
+    .gate-option-item:hover {
+        transform: none;
+    }
+    
+    /* Add active states for touch feedback */
+    .btn:active {
+        transform: scale(0.98);
+    }
+    
+    .gate-palette-btn:active {
+        transform: scale(0.95);
+    }
+}
+
+/* ============================================
+   PRINT STYLES (Maintain existing)
+   ============================================ */
+
+@media print {
+    .mobile-menu-toggle,
+    .dashboard-menu-toggle,
+    .mobile-overlay,
+    .gate-header-btn,
+    .gate-navigation-buttons,
+    .gate-right-panel {
+        display: none !important;
+    }
+    
+    .gate-question-panel {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Focus visible for keyboard navigation */
+@media (prefers-reduced-motion: no-preference) {
+    .nav-link,
+    .btn,
+    .gate-palette-btn {
+        transition: all 0.3s ease;
+    }
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn-primary,
+    .gate-palette-btn.gate-answered,
+    .gate-palette-btn.gate-not-answered {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Dark mode preparations (for future implementation) */
+@media (prefers-color-scheme: dark) {
+    /* Uncomment when implementing dark mode */
+    /*
+    :root {
+        --text-dark: #f7fafc;
+        --text-light: #cbd5e0;
+        --bg-light: #1a202c;
+        --bg-white: #2d3748;
+    }
+    */
+}

@@ -1,0 +1,330 @@
+/* ============================================
+   GEOCATALYST - QUICK MOBILE FIXES
+   Paste this at the END of your existing styles.css
+   for immediate mobile improvements
+   ============================================ */
+
+/* === CRITICAL FIXES === */
+
+/* 1. Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* 2. Proper mobile viewport */
+* {
+    -webkit-tap-highlight-color: rgba(102, 126, 234, 0.2);
+}
+
+/* 3. Smooth scrolling on iOS */
+body {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* === MOBILE BREAKPOINT === */
+@media (max-width: 768px) {
+    
+    /* Header fixes */
+    .header-content {
+        padding: 12px 0;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .logo img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Hide desktop nav, show it with JS */
+    .nav-links {
+        display: none;
+    }
+    
+    .auth-buttons {
+        gap: 8px;
+    }
+    
+    .auth-buttons .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    /* Hero section */
+    .hero {
+        padding: 40px 0;
+    }
+    
+    .hero-title {
+        font-size: 28px !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 18px !important;
+    }
+    
+    .hero-description {
+        font-size: 15px !important;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+    }
+    
+    .hero-cta .btn {
+        width: 100%;
+    }
+    
+    /* Section spacing */
+    .overview,
+    .content-section {
+        padding: 40px 0;
+    }
+    
+    .section-title {
+        font-size: 24px !important;
+    }
+    
+    .section-subtitle {
+        font-size: 15px !important;
+    }
+    
+    /* Cards */
+    .subjects-preview,
+    .pricing-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+    
+    .subject-card,
+    .package-card {
+        padding: 20px;
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        gap: 24px;
+    }
+    
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    /* Modals */
+    .auth-modal-content,
+    .video-modal-content {
+        max-width: 95% !important;
+        margin: 20px auto;
+    }
+    
+    .auth-modal-header {
+        padding: 24px 20px 20px;
+    }
+    
+    .auth-modal-header h2 {
+        font-size: 22px;
+    }
+    
+    .auth-form {
+        padding: 0 20px 24px;
+    }
+    
+    /* Dashboard */
+    #sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    #sidebar.mobile-open {
+        transform: translateX(0);
+    }
+    
+    #content {
+        margin-left: 0 !important;
+        padding: 20px 15px !important;
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .dashboard-card {
+        padding: 16px;
+    }
+    
+    /* Profile */
+    .profile-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Buttons - bigger touch targets */
+    .btn {
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+    
+    .btn-sm {
+        min-height: 40px;
+    }
+    
+    /* Forms - prevent zoom on iOS */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+    
+    .form-input {
+        min-height: 44px;
+    }
+    
+    /* Test Interface Quick Fixes */
+    .gate-test-header {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .gate-header-left,
+    .gate-header-right {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .gate-test-container {
+        flex-direction: column !important;
+    }
+    
+    .gate-question-panel {
+        margin: 8px;
+        padding: 16px;
+    }
+    
+    .gate-right-panel {
+        width: 100% !important;
+        border-left: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 8px;
+    }
+    
+    .gate-palette-grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+    }
+    
+    .gate-navigation-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .gate-nav-btn {
+        width: 100%;
+    }
+    
+    /* Answer options */
+    .gate-option-item {
+        padding: 12px;
+    }
+    
+    /* Question content scrolling */
+    .gate-question-content {
+        max-height: 40vh;
+        overflow-y: auto;
+    }
+    
+    /* Tables */
+    .leaderboard-table {
+        font-size: 12px;
+    }
+    
+    .leaderboard-table th,
+    .leaderboard-table td {
+        padding: 8px 4px;
+    }
+    
+    /* Hide less important columns */
+    .time-col,
+    .date-col {
+        display: none !important;
+    }
+}
+
+/* === EXTRA SMALL DEVICES === */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    .hero-title {
+        font-size: 24px !important;
+    }
+    
+    .section-title {
+        font-size: 22px !important;
+    }
+    
+    .gate-palette-btn {
+        font-size: 10px;
+        min-height: 32px;
+    }
+    
+    .wrong-col {
+        display: none !important;
+    }
+}
+
+/* === LANDSCAPE MODE === */
+@media (max-width: 768px) and (orientation: landscape) {
+    .gate-test-container {
+        flex-direction: row !important;
+    }
+    
+    .gate-right-panel {
+        width: 280px !important;
+        border-top: none;
+        border-left: 1px solid #e0e0e0;
+    }
+    
+    .hero {
+        padding: 30px 0;
+    }
+}
+
+/* === UTILITY CLASSES === */
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none !important;
+    }
+}
+
+/* === TOUCH IMPROVEMENTS === */
+@media (hover: none) {
+    /* Larger tap targets on touch devices */
+    a, button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Remove hover effects */
+    .subject-card:hover,
+    .btn:hover {
+        transform: none;
+    }
+    
+    /* Add active state feedback */
+    .btn:active {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+}

@@ -1,0 +1,71 @@
+{
+  "name": "GeoCatalyst - GATE Geomatics Preparation",
+  "short_name": "GeoCatalyst",
+  "description": "Your Gateway to GATE Geomatics Success. Learn from IIT Bombay scholars and AIR 1 & 2 rank holders.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "assets/images/logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/dashboard.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/screenshots/test-interface.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Test",
+      "short_name": "Test",
+      "description": "Take a practice test",
+      "url": "/?action=start-test",
+      "icons": [
+        {
+          "src": "assets/images/test-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Watch Lectures",
+      "short_name": "Lectures",
+      "description": "Continue learning",
+      "url": "/?action=lectures",
+      "icons": [
+        {
+          "src": "assets/images/lecture-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "lang": "en-IN",
+  "dir": "ltr"
+}

@@ -1,0 +1,513 @@
+/* ============================================
+   MOBILE ENHANCEMENTS - RIPPLE & TOUCH EFFECTS
+   ============================================ */
+
+/* Touch Ripple Effect */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Buttons need position relative for ripple */
+.btn,
+.gate-palette-btn,
+.nav-item {
+    position: relative;
+    overflow: hidden;
+}
+
+/* ============================================
+   PULL-TO-REFRESH INDICATOR (Optional)
+   ============================================ */
+
+.pull-to-refresh {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: top 0.3s ease;
+    z-index: 1000;
+}
+
+.pull-to-refresh.active {
+    top: 20px;
+}
+
+.pull-to-refresh svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--primary-color);
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   MOBILE-SPECIFIC SCROLLBAR STYLING
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Hide scrollbar but keep functionality */
+    .gate-question-content::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .gate-question-content::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .gate-question-content::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+    
+    /* For Firefox */
+    .gate-question-content {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    }
+}
+
+/* ============================================
+   MOBILE BOTTOM NAVIGATION (Alternative)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+        display: none; /* Enable if you want bottom nav */
+        justify-content: space-around;
+        padding: 8px 0;
+        z-index: 999;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mobile-bottom-nav.active {
+        display: flex;
+    }
+    
+    .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 12px;
+        color: var(--text-light);
+        font-size: 11px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .mobile-nav-item i {
+        font-size: 20px;
+    }
+    
+    .mobile-nav-item.active {
+        color: var(--primary-color);
+    }
+    
+    /* Add padding to content if bottom nav is used */
+    body.has-bottom-nav #content {
+        padding-bottom: 80px;
+    }
+}
+
+/* ============================================
+   SAFE AREA INSETS (iOS)
+   ============================================ */
+
+@supports (padding-top: env(safe-area-inset-top)) {
+    .header {
+        padding-top: env(safe-area-inset-top);
+    }
+    
+    .footer {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    #sidebar {
+        padding-top: env(safe-area-inset-top);
+    }
+    
+    .gate-test-header {
+        padding-top: calc(12px + env(safe-area-inset-top));
+    }
+    
+    .mobile-bottom-nav {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* ============================================
+   MOBILE LOADING STATES
+   ============================================ */
+
+.mobile-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading-skeleton 1.5s ease-in-out infinite;
+    border-radius: 8px;
+}
+
+@keyframes loading-skeleton {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.mobile-skeleton-text {
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.mobile-skeleton-text.large {
+    height: 24px;
+}
+
+.mobile-skeleton-text.small {
+    height: 12px;
+    width: 60%;
+}
+
+.mobile-skeleton-card {
+    height: 120px;
+    width: 100%;
+}
+
+/* ============================================
+   MOBILE IMAGE OPTIMIZATION
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Lazy load images with placeholder */
+    img[loading="lazy"] {
+        background: #f0f0f0;
+        min-height: 100px;
+    }
+    
+    img[loading="lazy"].loaded {
+        animation: fadeInImage 0.3s ease;
+    }
+    
+    @keyframes fadeInImage {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    /* Optimize team photos for mobile */
+    .team-photo,
+    .user-avatar,
+    .gate-user-photo {
+        will-change: transform;
+    }
+}
+
+/* ============================================
+   MOBILE TOAST NOTIFICATIONS
+   ============================================ */
+
+.mobile-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    z-index: 10001;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.mobile-toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+.mobile-toast.success {
+    background: var(--success-color);
+}
+
+.mobile-toast.error {
+    background: var(--error-color);
+}
+
+.mobile-toast.info {
+    background: var(--info-color);
+}
+
+/* ============================================
+   MOBILE SWIPE INDICATORS
+   ============================================ */
+
+.swipe-indicator {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.swipe-indicator.left {
+    left: 20px;
+}
+
+.swipe-indicator.right {
+    right: 20px;
+}
+
+.swipe-indicator.show {
+    opacity: 1;
+}
+
+/* ============================================
+   MOBILE-OPTIMIZED FORMS
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Prevent zoom on input focus (iOS) */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+    
+    /* Better touch targets */
+    input,
+    textarea,
+    select {
+        min-height: 44px;
+    }
+    
+    /* Floating labels for better UX */
+    .form-group {
+        position: relative;
+    }
+    
+    .form-group.floating label {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+        pointer-events: none;
+        color: var(--text-light);
+    }
+    
+    .form-group.floating input:focus + label,
+    .form-group.floating input:not(:placeholder-shown) + label {
+        top: 0;
+        font-size: 12px;
+        background: white;
+        padding: 0 4px;
+        color: var(--primary-color);
+    }
+}
+
+/* ============================================
+   MOBILE VIDEO PLAYER OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .video-player-wrapper {
+        border-radius: 0;
+    }
+    
+    .video-modal-content {
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .video-modal-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+    }
+    
+}
+
+/* ============================================
+   MOBILE TABLE RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Card-style tables for mobile */
+    .leaderboard-table.card-view {
+        display: block;
+    }
+    
+    .leaderboard-table.card-view thead {
+        display: none;
+    }
+    
+    .leaderboard-table.card-view tbody {
+        display: block;
+    }
+    
+    .leaderboard-table.card-view tr {
+        display: block;
+        margin-bottom: 16px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 12px;
+        background: white;
+    }
+    
+    .leaderboard-table.card-view td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border: none;
+    }
+    
+    .leaderboard-table.card-view td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-light);
+        font-size: 12px;
+    }
+}
+
+/* ============================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Reduce animations for better performance */
+    .reduce-motion * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    /* GPU acceleration for smooth scrolling */
+    .gate-question-content,
+    .gate-palette-container,
+    .doubt-messages {
+        -webkit-overflow-scrolling: touch;
+        transform: translateZ(0);
+        will-change: scroll-position;
+    }
+    
+    /* Optimize expensive operations */
+    .team-member-card:hover .team-photo-ring {
+        animation: none; /* Disable on mobile */
+    }
+}
+
+/* ============================================
+   MOBILE ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Larger text for better readability */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* Better focus indicators */
+    *:focus {
+        outline: 3px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+    
+    /* Skip to content link */
+    .skip-to-content {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        z-index: 100;
+    }
+    
+    .skip-to-content:focus {
+        top: 0;
+    }
+}
+
+/* ============================================
+   MOBILE DARK MODE (Optional)
+   ============================================ */
+
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+    /* Uncomment to enable dark mode on mobile
+    body {
+        background: #1a202c;
+        color: #f7fafc;
+    }
+    
+    .header,
+    .nav,
+    .dashboard-card,
+    .profile-card,
+    .subject-card {
+        background: #2d3748;
+        color: #f7fafc;
+    }
+    
+    .form-input {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f7fafc;
+    }
+    */
+}
