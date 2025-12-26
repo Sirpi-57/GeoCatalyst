@@ -1662,7 +1662,10 @@ function loadQuestion(questionIndex) {
     document.getElementById('gateQuestionNegative').textContent = `-${question.negativeMarks?.toFixed(2) || '0.00'}`;
     
     // Update section names
-    const sectionName = question.section || 'General Aptitude';
+    let sectionName = question.section || 'General Aptitude';
+    if (sectionName === 'General Aptitude') {
+        sectionName = 'General';
+    }
     document.getElementById('gateCurrentSection').textContent = sectionName;
     document.getElementById('gatePaletteSection').textContent = sectionName;
 
