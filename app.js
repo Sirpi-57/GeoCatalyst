@@ -1819,6 +1819,11 @@ function renderNATInput(questionIndex, savedAnswer) {
     const natContainer = document.getElementById('gateNATContainer');
     const natDisplay = document.getElementById('gateNATInput');
     
+    if (!natContainer || !natDisplay) {
+        console.error('❌ NAT container or display not found!');
+        return;
+    }
+    
     // Set initial value
     const initialValue = savedAnswer !== undefined && savedAnswer !== null ? String(savedAnswer) : '';
     natDisplay.value = initialValue;
@@ -1826,27 +1831,43 @@ function renderNATInput(questionIndex, savedAnswer) {
 
     // Initialize Simple-Keyboard if not already done
     if (!natKeyboard) {
-        // ✅ CRITICAL: Use # for ID selector, NOT .#
-        natKeyboard = new window.SimpleKeyboard.default('#gateNATKeyboard', {
-            onChange: input => {
-                natDisplay.value = input;
-                console.log('NAT Input Changed:', input);
-            },
-            onKeyPress: button => handleNatKeyPress(button),
-            layout: {
-                default: [
-                    "7 8 9",
-                    "4 5 6",
-                    "1 2 3",
-                    "0 . - {bksp}"
-                ]
-            },
-            display: {
-                '{bksp}': '←'
-            },
-            preventMouseDownDefault: true
-        });
-        console.log('✅ NAT Keyboard initialized');
+        try {
+            // Check if SimpleKeyboard is loaded
+            if (!window.SimpleKeyboard) {
+                console.error('❌ SimpleKeyboard library not loaded!');
+                return;
+            }
+            
+            // Check if keyboard container exists
+            const keyboardContainer = document.getElementById('gateNATKeyboard');
+            if (!keyboardContainer) {
+                console.error('❌ Keyboard container element not found!');
+                return;
+            }
+            
+            natKeyboard = new window.SimpleKeyboard.default('#gateNATKeyboard', {
+                onChange: input => {
+                    natDisplay.value = input;
+                    console.log('NAT Input Changed:', input);
+                },
+                onKeyPress: button => handleNatKeyPress(button),
+                layout: {
+                    default: [
+                        "7 8 9",
+                        "4 5 6",
+                        "1 2 3",
+                        "0 . - {bksp}"
+                    ]
+                },
+                display: {
+                    '{bksp}': '←'
+                },
+                preventMouseDownDefault: true
+            });
+            console.log('✅ NAT Keyboard initialized');
+        } catch (error) {
+            console.error('❌ Error initializing NAT keyboard:', error);
+        }
     } else {
         natKeyboard.setInput(initialValue);
     }
