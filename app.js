@@ -1816,15 +1816,21 @@ function renderTrueFalseOptions(questionIndex, savedAnswer) {
  * Sets up the NAT input display and initializes/shows the virtual keyboard.
  */
 function renderNATInput(questionIndex, savedAnswer) {
-    const natContainer = document.getElementById('gateNATContainer'); // UPDATED ID
-    const natDisplay = document.getElementById('gateNATInput'); // UPDATED ID
-    natDisplay.value = savedAnswer !== undefined && savedAnswer !== null ? savedAnswer : '';
+    const natContainer = document.getElementById('gateNATContainer');
+    const natDisplay = document.getElementById('gateNATInput');
+    
+    // Set initial value
+    const initialValue = savedAnswer !== undefined && savedAnswer !== null ? String(savedAnswer) : '';
+    natDisplay.value = initialValue;
     natContainer.style.display = 'block';
 
     // Initialize Simple-Keyboard if not already done
     if (!natKeyboard) {
-        natKeyboard = new window.SimpleKeyboard.default("#gateNATKeyboard", { // UPDATED selector
-            onChange: input => natDisplay.value = input,
+        natKeyboard = new window.SimpleKeyboard.default("#gateNATKeyboard", {
+            onChange: input => {
+                natDisplay.value = input;
+                console.log('NAT Input Changed:', input); // Debug log
+            },
             onKeyPress: button => handleNatKeyPress(button),
             layout: {
                 default: [
@@ -1837,11 +1843,16 @@ function renderNATInput(questionIndex, savedAnswer) {
             display: {
                 '{bksp}': '←'
             },
-            preventMouseDownDefault: true
+            preventMouseDownDefault: true,
+            syncInstanceInputs: true, // ADD THIS
+            physicalKeyboardHighlight: true // ADD THIS
         });
-    } else {
-        natKeyboard.setInput(natDisplay.value);
+        console.log('✅ NAT Keyboard initialized'); // Debug log
     }
+    
+    // IMPORTANT: Set the keyboard input to match the display
+    natKeyboard.setInput(initialValue);
+    console.log('NAT Initial Value Set:', initialValue); // Debug log
 }
 
 /**
@@ -1858,9 +1869,17 @@ function hideNatKeyboard() {
  * Handles special key presses on the NAT keyboard (like backspace).
  */
 function handleNatKeyPress(button) {
-    const natDisplay = document.getElementById('gateNATInput'); // UPDATED ID
+    const natDisplay = document.getElementById('gateNATInput');
+    console.log('Key Pressed:', button, 'Current Value:', natDisplay.value); // Debug log
+    
     if (button === "{bksp}") {
-        // Handled by onChange usually
+        // Backspace is handled by onChange
+        console.log('Backspace pressed');
+    }
+    
+    // Sync keyboard with display after any key press
+    if (natKeyboard) {
+        natKeyboard.setInput(natDisplay.value);
     }
 }
 
@@ -1980,15 +1999,21 @@ function saveCurrentAnswer() {
             saved = true;
         }
     } else if (question.type === 'numerical') {
-        const natDisplay = document.getElementById('gateNATInput'); // UPDATED ID
-        if (natDisplay.value.trim() !== '') {
-             const numValue = natDisplay.value.trim();
-             if (/^-?\d*(\.\d+)?$/.test(numValue) && numValue !== '-' && numValue !== '.') {
-                 answer = numValue;
-                 saved = true;
-             } else {
-                 console.warn(`Invalid numerical input for Q${currentQuestionIndex + 1}: "${numValue}"`);
-             }
+        const natDisplay = document.getElementById('gateNATInput');
+        const inputValue = natDisplay.value.trim();
+        
+        console.log('Saving NAT Answer:', inputValue); // Debug log
+        
+        if (inputValue !== '') {
+            if (/^-?\d*(\.\d+)?$/.test(inputValue) && inputValue !== '-' && inputValue !== '.') {
+                answer = inputValue;
+                saved = true;
+                console.log('✅ NAT Answer Valid:', answer); // Debug log
+            } else {
+                console.warn(`❌ Invalid numerical input: "${inputValue}"`); // Debug log
+            }
+        } else {
+            console.log('ℹ️ NAT Answer is empty'); // Debug log
         }
     }
 
