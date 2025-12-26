@@ -1826,10 +1826,10 @@ function renderNATInput(questionIndex, savedAnswer) {
 
     // Initialize Simple-Keyboard if not already done
     if (!natKeyboard) {
-        natKeyboard = new window.SimpleKeyboard.default("#gateNATKeyboard", {
+        natKeyboard = new window.SimpleKeyboard.default("#gateNATKeyboard", { // ✅ FIXED - removed the dot
             onChange: input => {
                 natDisplay.value = input;
-                console.log('NAT Input Changed:', input); // Debug log
+                console.log('NAT Input Changed:', input);
             },
             onKeyPress: button => handleNatKeyPress(button),
             layout: {
@@ -1843,16 +1843,12 @@ function renderNATInput(questionIndex, savedAnswer) {
             display: {
                 '{bksp}': '←'
             },
-            preventMouseDownDefault: true,
-            syncInstanceInputs: true, // ADD THIS
-            physicalKeyboardHighlight: true // ADD THIS
+            preventMouseDownDefault: true
         });
-        console.log('✅ NAT Keyboard initialized'); // Debug log
+        console.log('✅ NAT Keyboard initialized');
+    } else {
+        natKeyboard.setInput(initialValue);
     }
-    
-    // IMPORTANT: Set the keyboard input to match the display
-    natKeyboard.setInput(initialValue);
-    console.log('NAT Initial Value Set:', initialValue); // Debug log
 }
 
 /**
