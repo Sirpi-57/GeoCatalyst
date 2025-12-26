@@ -1826,7 +1826,8 @@ function renderNATInput(questionIndex, savedAnswer) {
 
     // Initialize Simple-Keyboard if not already done
     if (!natKeyboard) {
-        natKeyboard = new window.SimpleKeyboard.default("#gateNATKeyboard", { // ✅ FIXED - removed the dot
+        // ✅ CRITICAL: Use # for ID selector, NOT .#
+        natKeyboard = new window.SimpleKeyboard.default('#gateNATKeyboard', {
             onChange: input => {
                 natDisplay.value = input;
                 console.log('NAT Input Changed:', input);
