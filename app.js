@@ -1813,73 +1813,75 @@ function renderTrueFalseOptions(questionIndex, savedAnswer) {
 }
 
 /**
- * Sets up the NAT input display and initializes/shows the virtual keyboard.
+ * Renders a custom HTML numerical keypad (No external libraries)
  */
 function renderNATInput(questionIndex, savedAnswer) {
     const natContainer = document.getElementById('gateNATContainer');
     const natDisplay = document.getElementById('gateNATInput');
+    const keyboardContainer = document.getElementById('gateNATKeyboard');
     
     if (!natContainer || !natDisplay) {
-        console.error('❌ NAT container or display not found!');
+        console.error('❌ NAT elements not found!');
         return;
     }
     
-    // Set initial value
-    const initialValue = savedAnswer !== undefined && savedAnswer !== null ? String(savedAnswer) : '';
-    natDisplay.value = initialValue;
+    // 1. Show Container
     natContainer.style.display = 'block';
+    
+    // 2. Set Initial Value and ensure it is valid
+    natDisplay.value = (savedAnswer !== undefined && savedAnswer !== null) ? String(savedAnswer) : '';
+    
+    // 3. Enable manual typing as a backup (Standard GATE allows keyboard too usually)
+    natDisplay.removeAttribute('readonly'); 
+    natDisplay.placeholder = "Enter answer here";
 
-    // Initialize Simple-Keyboard if not already done
-    if (!natKeyboard) {
-        try {
-            // Check if SimpleKeyboard is loaded
-            if (!window.SimpleKeyboard) {
-                console.error('❌ SimpleKeyboard library not loaded! Enabling manual input.');
-                // Fallback: Remove readonly so user can at least type
-                natDisplay.removeAttribute('readonly');
-                return;
-            }
-            
-            // Check if keyboard container exists
-            const keyboardContainer = document.getElementById('gateNATKeyboard');
-            if (!keyboardContainer) {
-                console.error('❌ Keyboard container element not found!');
-                return;
-            }
-            
-            // FIX: Handle both UMD (window.SimpleKeyboard) and ES Module (window.SimpleKeyboard.default)
-            const KeyboardClass = window.SimpleKeyboard.default || window.SimpleKeyboard;
+    // 4. Build Custom Keypad UI (If not already built)
+    // We check if it has children to avoid re-rendering on every keystroke if called elsewhere
+    if (keyboardContainer.children.length === 0) {
+        keyboardContainer.className = 'custom-nat-keyboard';
+        keyboardContainer.innerHTML = ''; // Clear just in case
 
-            natKeyboard = new KeyboardClass('#gateNATKeyboard', {
-                onChange: input => {
-                    natDisplay.value = input;
-                    // Trigger manual change event if needed for validation
-                },
-                onKeyPress: button => handleNatKeyPress(button),
-                layout: {
-                    default: [
-                        "1 2 3",
-                        "4 5 6",
-                        "7 8 9",
-                        "0 . - {bksp}"
-                    ]
-                },
-                theme: "hg-theme-default hg-layout-numeric numeric-theme",
-                display: {
-                    '{bksp}': '⌫'
-                },
-                preventMouseDownDefault: true // Prevents input blur
-            });
+        // Standard GATE Calculator Layout
+        const keys = [
+            '7', '8', '9', 
+            '4', '5', '6', 
+            '1', '2', '3', 
+            '0', '.', '-', 
+            'Clear', '⌫'
+        ];
+
+        keys.forEach(key => {
+            const btn = document.createElement('button');
+            btn.textContent = key;
+            btn.type = 'button'; // Prevent form submission
+            btn.className = 'nat-key-btn';
             
-            console.log('✅ NAT Keyboard initialized successfully');
-        } catch (error) {
-            console.error('❌ Error initializing NAT keyboard:', error);
-            // Fallback: If keyboard crashes, let user type manually
-            natDisplay.removeAttribute('readonly');
-            natDisplay.placeholder = "Error loading keyboard. Please type answer here.";
-        }
-    } else {
-        natKeyboard.setInput(initialValue);
+            // Styling for specific keys
+            if (key === '⌫') btn.classList.add('nat-backspace');
+            if (key === 'Clear') btn.classList.add('nat-clear');
+
+            // Click Handler
+            btn.onclick = (e) => {
+                e.preventDefault(); // Stop focus stealing
+                const currentVal = natDisplay.value;
+
+                if (key === '⌫') {
+                    natDisplay.value = currentVal.slice(0, -1);
+                } else if (key === 'Clear') {
+                    natDisplay.value = '';
+                } else {
+                    // Prevent multiple decimal points
+                    if (key === '.' && currentVal.includes('.')) return;
+                    // Prevent multiple minus signs or minus not at start
+                    if (key === '-' && currentVal.length > 0) return;
+                    
+                    natDisplay.value = currentVal + key;
+                }
+                natDisplay.focus(); // Keep focus on input
+            };
+
+            keyboardContainer.appendChild(btn);
+        });
     }
 }
 
@@ -1964,7 +1966,7 @@ function handleClearResponse() {
     } else if (question.type === 'numerical') {
         const natDisplay = document.getElementById('gateNATInput'); // UPDATED ID
         natDisplay.value = '';
-        if (natKeyboard) natKeyboard.clearInput();
+        // if (natKeyboard) natKeyboard.clearInput();
     }
     delete studentAnswers[currentQuestionIndex];
 
