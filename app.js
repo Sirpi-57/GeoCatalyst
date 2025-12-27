@@ -1834,7 +1834,9 @@ function renderNATInput(questionIndex, savedAnswer) {
         try {
             // Check if SimpleKeyboard is loaded
             if (!window.SimpleKeyboard) {
-                console.error('❌ SimpleKeyboard library not loaded!');
+                console.error('❌ SimpleKeyboard library not loaded! Enabling manual input.');
+                // Fallback: Remove readonly so user can at least type
+                natDisplay.removeAttribute('readonly');
                 return;
             }
             
@@ -1845,28 +1847,36 @@ function renderNATInput(questionIndex, savedAnswer) {
                 return;
             }
             
-            natKeyboard = new window.SimpleKeyboard.default('#gateNATKeyboard', {
+            // FIX: Handle both UMD (window.SimpleKeyboard) and ES Module (window.SimpleKeyboard.default)
+            const KeyboardClass = window.SimpleKeyboard.default || window.SimpleKeyboard;
+
+            natKeyboard = new KeyboardClass('#gateNATKeyboard', {
                 onChange: input => {
                     natDisplay.value = input;
-                    console.log('NAT Input Changed:', input);
+                    // Trigger manual change event if needed for validation
                 },
                 onKeyPress: button => handleNatKeyPress(button),
                 layout: {
                     default: [
-                        "7 8 9",
-                        "4 5 6",
                         "1 2 3",
+                        "4 5 6",
+                        "7 8 9",
                         "0 . - {bksp}"
                     ]
                 },
+                theme: "hg-theme-default hg-layout-numeric numeric-theme",
                 display: {
-                    '{bksp}': '←'
+                    '{bksp}': '⌫'
                 },
-                preventMouseDownDefault: true
+                preventMouseDownDefault: true // Prevents input blur
             });
-            console.log('✅ NAT Keyboard initialized');
+            
+            console.log('✅ NAT Keyboard initialized successfully');
         } catch (error) {
             console.error('❌ Error initializing NAT keyboard:', error);
+            // Fallback: If keyboard crashes, let user type manually
+            natDisplay.removeAttribute('readonly');
+            natDisplay.placeholder = "Error loading keyboard. Please type answer here.";
         }
     } else {
         natKeyboard.setInput(initialValue);

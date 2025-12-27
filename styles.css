@@ -3383,3 +3383,39 @@ body.modal-open { /* Or just rely on the inline style added by JS */
         transform: translateY(0);
     }
 }
+
+/* Numeric Keyboard Specific Styles */
+#gateNATContainer {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.gate-nat-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+/* Custom theme for numeric keyboard to match GATE look */
+.simple-keyboard.numeric-theme {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.simple-keyboard.numeric-theme .hg-button {
+    height: 50px !important; /* Force button height */
+    font-weight: bold;
+    background: white;
+    border-bottom: 2px solid #b5b5b5;
+}
+
+.simple-keyboard.numeric-theme .hg-button:active {
+    background: #ddd;
+    transform: translateY(2px);
+}
