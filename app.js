@@ -2326,6 +2326,13 @@ async function handleFinalSubmit(isAutoSubmit = false) {
  */
 async function showTestReview(attemptId) {
     console.log('📋 Loading test review for attempt:', attemptId);
+
+    // ✅ ADD THIS: Clear modal title and summary IMMEDIATELY
+    document.getElementById('reviewModalTitle').textContent = 'Loading...';
+    document.getElementById('reviewScore').textContent = '... / ...';
+    document.getElementById('reviewCorrect').textContent = '...';
+    document.getElementById('reviewWrong').textContent = '...';
+    document.getElementById('reviewUnattempted').textContent = '...';
     
     openModal('testReviewModal');
     
@@ -3064,7 +3071,13 @@ function cleanupTestInterface() {
      closeModal('questionPaperModal');
      closeModal('usefulDataModal');
      closeModal('confirmationModal');
-     closeModal('testReviewModal'); // 🆕 ADD THIS
+     closeModal('testReviewModal');
+
+    // ✅ ADD THIS: Clear review modal content
+    const reviewContainer = document.getElementById('reviewQuestionsContainer');
+    if (reviewContainer) {
+        reviewContainer.innerHTML = '';
+    }
 
      // Reset state variables
      currentTest = null;
@@ -3289,6 +3302,7 @@ function showTestNotification(message, title = "Notification") {
 
 function exitTestInterface() {
     closeModal('testResultModal');
+    closeModal('testReviewModal');
     cleanupTestInterface();
 }
 
