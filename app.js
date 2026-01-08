@@ -582,12 +582,21 @@ function switchTab(tabName) {
 }
 
 // ============================================
-// EVENT LISTENERS FOR TEST INTERFACE
+// TAB NAVIGATION (Public View)
 // ============================================
 
+// Set up tab navigation listeners
 document.addEventListener('DOMContentLoaded', () => {
+    // Nav links
+    document.querySelectorAll('[data-tab]').forEach(element => {
+        element.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tabName = element.getAttribute('data-tab');
+            switchTab(tabName);
+        });
+    });
     
-    // ✅ ADD THESE AUTH BUTTON LISTENERS
+    // Auth buttons
     document.querySelectorAll('[data-action="signin"]').forEach(btn => {
         btn.addEventListener('click', () => openModal('loginModal'));
     });
@@ -599,7 +608,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-action="purchase"]').forEach(btn => {
         btn.addEventListener('click', () => openModal('signupModal'));
     });
+});
 
+// ============================================
+// EVENT LISTENERS FOR TEST INTERFACE
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
     // Instructions Modal Acknowledge Checkbox
     const acknowledgeCheckbox = document.getElementById('instructionsAcknowledge');
     const startTestActualBtn = document.getElementById('startTestButton');
