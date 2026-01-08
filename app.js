@@ -1744,7 +1744,7 @@ function loadQuestion(questionIndex) {
     }
 
     // CHECK FOR OVERFLOW AND SHOW BUTTON - Delay to ensure content is rendered
-    setTimeout(() => checkQuestionOverflow(), 100);
+    setTimeout(() => checkQuestionOverflow(), 5);
 }
 
 // ============================================
@@ -1759,13 +1759,15 @@ function checkQuestionOverflow() {
     const viewBtn = document.getElementById('viewFullQuestionBtn');
     
     if (questionContent && viewBtn) {
-        // Check if content is scrollable (overflowing)
-        if (questionContent.scrollHeight > questionContent.clientHeight) {
+        // Check if content height exceeds 40% of viewport height (threshold)
+        const maxReasonableHeight = window.innerHeight * 0.4; // 40vh threshold
+        
+        if (questionContent.scrollHeight > maxReasonableHeight) {
             viewBtn.style.display = 'block';
-            console.log('📏 Question is overflowing - showing button');
+            console.log('📏 Question is long - showing view full button');
         } else {
             viewBtn.style.display = 'none';
-            console.log('📏 Question fits - hiding button');
+            console.log('📏 Question fits well - hiding button');
         }
     }
 }

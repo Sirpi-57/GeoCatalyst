@@ -1646,13 +1646,15 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* ============================================
    5. ANSWER OPTIONS - VERTICAL RADIO BUTTONS (UPDATED)
    ============================================ */
-/* .gate-answer-options {
+.gate-answer-options {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 8px; /* Slightly increased for better spacing */
+    margin-bottom: 16px;
     flex-shrink: 0;
-} */
+    max-height: none; /* Remove height limit - let it flow naturally */
+    overflow-y: visible; /* No scroll needed */
+}
 
 /* 🆕 UPDATED - Entire option clickable
 .gate-option-item {
@@ -1779,20 +1781,21 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* ============================================
    7. NAVIGATION BUTTONS (BOTTOM) - NO CHANGE NEEDED
    ============================================ */
+/* Navigation Buttons - Slightly more compact */
 .gate-navigation-buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: space-between;
     padding-top: 16px;
     border-top: 2px solid #e0e0e0;
-    flex-shrink: 0; /* CRITICAL: Buttons stay fixed at bottom */
-    background: white; /* Ensures text doesn't scroll behind buttons */
+    flex-shrink: 0;
+    background: white;
 }
 
 .gate-nav-btn {
     flex: 1;
-    padding: 14px 24px;
-    font-size: 14px;
+    padding: 12px 20px;
+    font-size: 13px;
     font-weight: 600;
     border-radius: 8px;
     border: none;
@@ -3419,17 +3422,19 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* ============================================
    IMPROVED QUESTION CONTENT AREA
    ============================================ */
+/* Question Content - Better approach */
 .gate-question-content {
-    flex: 0 1 auto; /* Changed from flex: 1 */
+    flex: 1; /* Let it grow naturally */
     overflow-y: auto;
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px; /* Slightly smaller */
+    line-height: 1.6;
     color: #333;
+    padding: 12px;
     padding-right: 8px;
     margin-bottom: 12px;
-    max-height: 30vh; /* ADD THIS - Limits question height to 30% of viewport */
-    position: relative; /* ADD THIS - For absolute positioning of button */
-    min-height: 100px; /* ADD THIS - Ensures minimum readable space */
+    max-height: 45vh; /* Increased from 30vh - more reasonable */
+    position: relative;
+    min-height: 80px;
 }
 
 /* Better scrollbar styling */
@@ -3454,7 +3459,7 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* Question text styling */
 .question-text {
     margin-bottom: 12px;
-    font-size: 15px; /* Slightly smaller */
+    font-size: 15px;
     line-height: 1.6;
 }
 
@@ -3480,8 +3485,8 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 .gate-option-item {
     display: flex;
     align-items: center;
-    gap: 8px; /* Reduced from 10px */
-    padding: 8px 10px; /* Reduced from 10px 12px */
+    gap: 10px;
+    padding: 10px 14px; /* Balanced padding */
     background: #f9f9f9;
     border: 2px solid #e0e0e0;
     border-radius: 6px;
@@ -3513,9 +3518,9 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* Radio/Checkbox - Smaller */
 .gate-radio-input,
 .gate-checkbox-input {
-    width: 18px; /* Reduced from 20px */
+    width: 18px;
     height: 18px;
-    margin-top: 0; /* Changed from 2px */
+    margin-top: 0;
     cursor: pointer;
     accent-color: #667eea;
     flex-shrink: 0;
@@ -3524,23 +3529,23 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* Option Label - More Compact */
 .gate-option-label {
     display: flex;
-    gap: 8px; /* Reduced from 12px */
+    gap: 10px;
     flex: 1;
     cursor: pointer;
-    align-items: center; /* Changed from flex-start */
+    align-items: center;
 }
 
 .gate-option-letter {
     font-weight: 700;
     color: #667eea;
-    font-size: 14px; /* Reduced from 16px */
-    min-width: 20px; /* Reduced from 24px */
+    font-size: 14px;
+    min-width: 22px;
 }
 
 .gate-option-text {
     flex: 1;
-    font-size: 13px; /* Reduced from 14px */
-    line-height: 1.4; /* Reduced from 1.5 */
+    font-size: 14px;
+    line-height: 1.5;
     color: #333;
 }
 
@@ -3560,10 +3565,9 @@ body.modal-open { /* Or just rely on the inline style added by JS */
    VIEW FULL QUESTION BUTTON (OPTIONAL)
    ============================================ */
 .view-full-question-btn {
-    position: sticky; /* Changed from absolute */
-    top: 0; /* Changed from top: 8px, right: 8px */
-    right: 0;
-    float: right; /* ADD THIS */
+    position: absolute;
+    top: 8px;
+    right: 8px;
     background: rgba(102, 126, 234, 0.95);
     color: white;
     border: none;
@@ -3572,14 +3576,14 @@ body.modal-open { /* Or just rely on the inline style added by JS */
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    display: none;
+    display: none; /* Hidden by default */
     z-index: 10;
     transition: all 0.3s ease;
-    margin-bottom: 10px; /* ADD THIS */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .view-full-question-btn:hover {
-    background: rgba(118, 75, 162, 0.9);
+    background: rgba(118, 75, 162, 0.95);
     transform: scale(1.05);
 }
 
