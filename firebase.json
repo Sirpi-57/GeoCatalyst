@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "public": ".",                    
-    "ignore": [                       
+    "public": ".",
+    "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
@@ -10,20 +10,29 @@
       "backend.py",
       "requirements.txt",
       "Procfile",
-      "firebase-admin-key.json",      
+      "firebase-admin-key.json",
       "README.md",
       ".git",
       ".gitignore"
     ],
-    "rewrites": [           
+    "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
       }
     ],
-    "headers": [                      
+    "headers": [
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|woff|woff2|ttf|eot)",
+        "source": "**/*.@(html|js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|woff|woff2|ttf|eot)",
         "headers": [
           {
             "key": "Cache-Control",
