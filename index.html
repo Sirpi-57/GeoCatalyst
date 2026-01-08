@@ -2622,6 +2622,11 @@
 
             </div>
 
+            <!-- Add this button inside gate-question-content div -->
+            <button class="view-full-question-btn" id="viewFullQuestionBtn" onclick="openFullQuestionModal()">
+                🔍 View Full Question
+            </button>
+
 
 
             <!-- Right Panel - User Info & Palette -->
@@ -2808,6 +2813,19 @@
 
             </div>
 
+        </div>
+
+        <!-- Add this modal at the end of test-interface div, before closing -->
+        <div class="full-question-modal" id="fullQuestionModal">
+            <div class="full-question-modal-content">
+                <div class="full-question-modal-header">
+                    <h3>Question <span id="modalQuestionNumber">1</span></h3>
+                    <button class="close-full-question" onclick="closeFullQuestionModal()">×</button>
+                </div>
+                <div class="full-question-text" id="modalQuestionText">
+                    <!-- Question content will be cloned here -->
+                </div>
+            </div>
         </div>
 
 

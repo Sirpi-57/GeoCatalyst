@@ -581,29 +581,49 @@ function switchTab(tabName) {
     }
 }
 
-// Set up tab navigation listeners
+// ============================================
+// EVENT LISTENERS FOR TEST INTERFACE
+// ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Nav links
-    document.querySelectorAll('[data-tab]').forEach(element => {
-        element.addEventListener('click', (e) => {
-            e.preventDefault();
-            const tabName = element.getAttribute('data-tab');
-            switchTab(tabName);
+    // Instructions Modal Acknowledge Checkbox
+    const acknowledgeCheckbox = document.getElementById('instructionsAcknowledge');
+    const startTestActualBtn = document.getElementById('startTestButton');
+    if (acknowledgeCheckbox && startTestActualBtn) {
+        acknowledgeCheckbox.addEventListener('change', () => {
+            startTestActualBtn.disabled = !acknowledgeCheckbox.checked;
         });
+        startTestActualBtn.addEventListener('click', initializeTestInterface);
+    }
+
+    // Test Interface Navigation Buttons - UPDATED IDs
+    document.getElementById('gateSaveNextBtn')?.addEventListener('click', handleSaveAndNext);
+    document.getElementById('gateMarkReviewBtn')?.addEventListener('click', handleMarkForReview);
+    document.getElementById('gateClearBtn')?.addEventListener('click', handleClearResponse);
+    
+    // Submit Button - UPDATED ID
+    document.getElementById('gateSubmitBtn')?.addEventListener('click', handleSubmitClick);
+    
+    // Calculator Button - UPDATED ID
+    document.getElementById('gateCalculatorBtn')?.addEventListener('click', handleCalculatorClick);
+    
+    // Header Buttons - UPDATED IDs
+    document.getElementById('headerInstructionsBtn')?.addEventListener('click', handleInstructionsClick);
+    document.getElementById('headerQuestionPaperBtn')?.addEventListener('click', handleQuestionPaperClick);
+    document.getElementById('headerUsefulDataBtn')?.addEventListener('click', handleUsefulDataClick);
+
+    // Summary Modal Final Submit Button
+    document.getElementById('finalSubmitBtn')?.addEventListener('click', () => handleFinalSubmit(false));
+    
+    // 🆕 ADD THIS HERE - Close full question modal when clicking outside
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('fullQuestionModal');
+        if (event.target === modal) {
+            closeFullQuestionModal();
+        }
     });
     
-    // Auth buttons
-    document.querySelectorAll('[data-action="signin"]').forEach(btn => {
-        btn.addEventListener('click', () => openModal('loginModal'));
-    });
-    
-    document.querySelectorAll('[data-action="signup"]').forEach(btn => {
-        btn.addEventListener('click', () => openModal('signupModal'));
-    });
-    
-    document.querySelectorAll('[data-action="purchase"]').forEach(btn => {
-        btn.addEventListener('click', () => openModal('signupModal'));
-    });
+    console.log('✅ Test interface event listeners initialized (including full question modal)');
 });
 
 // ============================================
@@ -1728,7 +1748,84 @@ function loadQuestion(questionIndex) {
     } else {
         updatePaletteStatus(questionIndex, questionStatus[questionIndex]);
     }
+
+    setTimeout(() => checkQuestionOverflow(), 100);
 }
+
+// ============================================
+// 🆕 FULL QUESTION MODAL FUNCTIONS
+// ============================================
+
+/**
+ * Check if question content is overflowing and show/hide the "View Full Question" button
+ */
+function checkQuestionOverflow() {
+    const questionContent = document.getElementById('gateQuestionContent');
+    const viewBtn = document.getElementById('viewFullQuestionBtn');
+    
+    if (questionContent && viewBtn) {
+        // Check if content is scrollable (overflowing)
+        if (questionContent.scrollHeight > questionContent.clientHeight) {
+            viewBtn.style.display = 'block';
+            console.log('📏 Question is overflowing - showing button');
+        } else {
+            viewBtn.style.display = 'none';
+            console.log('📏 Question fits - hiding button');
+        }
+    }
+}
+
+/**
+ * Open full question modal to view long questions
+ */
+function openFullQuestionModal() {
+    const modal = document.getElementById('fullQuestionModal');
+    const questionContent = document.getElementById('gateQuestionContent');
+    const modalQuestionText = document.getElementById('modalQuestionText');
+    const modalQuestionNumber = document.getElementById('modalQuestionNumber');
+    const currentQuestionNum = document.getElementById('gateQuestionNumber');
+    
+    if (modal && questionContent && modalQuestionText) {
+        // Clone the question content (removes the button from modal)
+        const clonedContent = questionContent.cloneNode(true);
+        
+        // Remove the "View Full Question" button from cloned content
+        const btnInClone = clonedContent.querySelector('.view-full-question-btn');
+        if (btnInClone) {
+            btnInClone.remove();
+        }
+        
+        modalQuestionText.innerHTML = clonedContent.innerHTML;
+        
+        // Update question number
+        if (modalQuestionNumber && currentQuestionNum) {
+            modalQuestionNumber.textContent = currentQuestionNum.textContent;
+        }
+        
+        // Show modal
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        console.log('✅ Full question modal opened');
+    }
+}
+
+/**
+ * Close full question modal
+ */
+function closeFullQuestionModal() {
+    const modal = document.getElementById('fullQuestionModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        console.log('✅ Full question modal closed');
+    }
+}
+
+// Make functions globally accessible
+window.openFullQuestionModal = openFullQuestionModal;
+window.closeFullQuestionModal = closeFullQuestionModal;
+window.checkQuestionOverflow = checkQuestionOverflow;
 
 /**
  * Renders HTML for MCQ options.
