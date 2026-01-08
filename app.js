@@ -1660,10 +1660,6 @@ function initializeTestInterface() {
     console.log('✅ Test Interface Initialized.');
 }
 
-/**
- * Loads and displays a specific question by its index.
- * @param {number} questionIndex - The index of the question to load.
- */
 function loadQuestion(questionIndex) {
     if (!currentTest || questionIndex < 0 || questionIndex >= currentTest.questions.length) {
         console.error(`❌ Invalid question index: ${questionIndex}`);
@@ -1673,7 +1669,7 @@ function loadQuestion(questionIndex) {
     currentQuestionIndex = questionIndex;
     const question = currentTest.questions[questionIndex];
 
-    console.log('📖 Loading question:', questionIndex, question); // Debug log
+    console.log('📖 Loading question:', questionIndex, question);
 
     // Update header info
     document.getElementById('gateQuestionNumber').textContent = questionIndex + 1;
@@ -1692,24 +1688,22 @@ function loadQuestion(questionIndex) {
     // Update question content
     const questionContent = document.getElementById('gateQuestionContent');
     
-    // 🆕 BUILD QUESTION HTML WITH IMAGE SUPPORT
+    // BUILD QUESTION HTML WITH IMAGE SUPPORT
     let questionHTML = `<div class="question-text">${question.question || 'Question text missing.'}</div>`;
     
-    // 🆕 ADD IMAGE IF PRESENT
+    // ADD IMAGE IF PRESENT
     if (question.imageUrl) {
         console.log('🖼️ Question has image:', question.imageUrl);
         questionHTML += `
             <div style="margin-top: 20px; text-align: center;">
                 <img src="${question.imageUrl}" 
                     alt="Question Image" 
-                    style="max-width: 100%; height: auto; border-radius: 8px; border: 2px solid #e0e0e0; cursor: zoom-in; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
+                    style="max-width: 100%; max-height: 300px; height: auto; border-radius: 8px; border: 2px solid #e0e0e0; cursor: zoom-in; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
                     onclick="window.open('${question.imageUrl}', '_blank')"
                     onerror="console.error('Failed to load image:', '${question.imageUrl}')">
                 <p style="font-size: 12px; color: var(--text-light); margin-top: 8px; font-style: italic;">📌 Click image to view full size in new tab</p>
             </div>
         `;
-    } else {
-        console.log('ℹ️ No image for this question'); // Debug log
     }
     
     questionContent.innerHTML = questionHTML;
@@ -1749,6 +1743,7 @@ function loadQuestion(questionIndex) {
         updatePaletteStatus(questionIndex, questionStatus[questionIndex]);
     }
 
+    // CHECK FOR OVERFLOW AND SHOW BUTTON - Delay to ensure content is rendered
     setTimeout(() => checkQuestionOverflow(), 100);
 }
 

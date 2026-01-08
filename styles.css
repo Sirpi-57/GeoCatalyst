@@ -1646,15 +1646,15 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* ============================================
    5. ANSWER OPTIONS - VERTICAL RADIO BUTTONS (UPDATED)
    ============================================ */
-.gate-answer-options {
+/* .gate-answer-options {
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin-bottom: 24px;
-    flex-shrink: 0; /* Don't let options shrink */
-}
+    flex-shrink: 0;
+} */
 
-/* 🆕 UPDATED - Entire option clickable */
+/* 🆕 UPDATED - Entire option clickable
 .gate-option-item {
     display: flex;
     align-items: flex-start;
@@ -1664,9 +1664,9 @@ body.modal-open { /* Or just rely on the inline style added by JS */
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     transition: all 0.3s ease;
-    cursor: pointer; /* 🔥 Shows it's clickable */
-    user-select: none; /* Prevents text selection on click */
-}
+    cursor: pointer;
+    user-select: none; 
+} */
 
 .gate-option-item:hover {
     background: #f0f0f0;
@@ -1701,12 +1701,12 @@ body.modal-open { /* Or just rely on the inline style added by JS */
     min-width: 24px;
 }
 
-.gate-option-text {
+/* .gate-option-text {
     flex: 1;
     font-size: 15px;
     line-height: 1.6;
     color: #333;
-}
+} */
 
 /* 🆕 UPDATED - Better Checked State */
 .gate-option-item:has(input:checked) {
@@ -3420,15 +3420,16 @@ body.modal-open { /* Or just rely on the inline style added by JS */
    IMPROVED QUESTION CONTENT AREA
    ============================================ */
 .gate-question-content {
-    flex: 1;
+    flex: 0 1 auto; /* Changed from flex: 1 */
     overflow-y: auto;
     font-size: 16px;
     line-height: 1.7;
     color: #333;
     padding-right: 8px;
-    margin-bottom: 12px; /* Reduced from 16px */
-    max-height: none;
-    position: relative;
+    margin-bottom: 12px;
+    max-height: 30vh; /* ADD THIS - Limits question height to 30% of viewport */
+    position: relative; /* ADD THIS - For absolute positioning of button */
+    min-height: 100px; /* ADD THIS - Ensures minimum readable space */
 }
 
 /* Better scrollbar styling */
@@ -3476,14 +3477,17 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 /* ============================================
    COMPACT ANSWER OPTIONS - MAIN FIX
    ============================================ */
-.gate-answer-options {
+.gate-option-item {
     display: flex;
-    flex-direction: column;
-    gap: 8px; /* Reduced from 16px */
-    margin-bottom: 16px; /* Reduced from 24px */
-    flex-shrink: 0;
-    max-height: 40vh; /* Limit options to 40% of viewport height */
-    overflow-y: auto; /* Scroll options if too many */
+    align-items: center;
+    gap: 8px; /* Reduced from 10px */
+    padding: 8px 10px; /* Reduced from 10px 12px */
+    background: #f9f9f9;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
 }
 
 /* Compact option styling */
@@ -3535,8 +3539,8 @@ body.modal-open { /* Or just rely on the inline style added by JS */
 
 .gate-option-text {
     flex: 1;
-    font-size: 14px; /* Reduced from 15px */
-    line-height: 1.5; /* Reduced from 1.6 */
+    font-size: 13px; /* Reduced from 14px */
+    line-height: 1.4; /* Reduced from 1.5 */
     color: #333;
 }
 
@@ -3556,10 +3560,11 @@ body.modal-open { /* Or just rely on the inline style added by JS */
    VIEW FULL QUESTION BUTTON (OPTIONAL)
    ============================================ */
 .view-full-question-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(102, 126, 234, 0.9);
+    position: sticky; /* Changed from absolute */
+    top: 0; /* Changed from top: 8px, right: 8px */
+    right: 0;
+    float: right; /* ADD THIS */
+    background: rgba(102, 126, 234, 0.95);
     color: white;
     border: none;
     padding: 6px 12px;
@@ -3567,9 +3572,10 @@ body.modal-open { /* Or just rely on the inline style added by JS */
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    display: none; /* Hidden by default, show via JS when needed */
+    display: none;
     z-index: 10;
     transition: all 0.3s ease;
+    margin-bottom: 10px; /* ADD THIS */
 }
 
 .view-full-question-btn:hover {
