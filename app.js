@@ -586,6 +586,20 @@ function switchTab(tabName) {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // ✅ ADD THESE AUTH BUTTON LISTENERS
+    document.querySelectorAll('[data-action="signin"]').forEach(btn => {
+        btn.addEventListener('click', () => openModal('loginModal'));
+    });
+    
+    document.querySelectorAll('[data-action="signup"]').forEach(btn => {
+        btn.addEventListener('click', () => openModal('signupModal'));
+    });
+    
+    document.querySelectorAll('[data-action="purchase"]').forEach(btn => {
+        btn.addEventListener('click', () => openModal('signupModal'));
+    });
+
     // Instructions Modal Acknowledge Checkbox
     const acknowledgeCheckbox = document.getElementById('instructionsAcknowledge');
     const startTestActualBtn = document.getElementById('startTestButton');
